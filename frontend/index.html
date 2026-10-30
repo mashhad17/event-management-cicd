@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EventHub</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="brand">EventHub</a>
+      <ul class="nav-links">
+        <li><a href="#events">Events</a></li>
+        <li><a href="#create">Create event</a></li>
+        <li><a href="#deployment">Deployment</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header id="home" class="hero">
+    <div class="container">
+      <h1>Event Management Portal</h1>
+      <p>Browse upcoming events, register in seconds, and organise your own. Deployed to Kubernetes by a Jenkins CI/CD pipeline.</p>
+      <div class="stats">
+        <div class="stat"><span id="stat-events">0</span><small>Upcoming events</small></div>
+        <div class="stat"><span id="stat-registrations">0</span><small>Registrations</small></div>
+        <div class="stat"><span id="stat-build">&ndash;</span><small>Jenkins build deployed</small></div>
+      </div>
+      <a href="#events" class="btn">See events</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="events" class="card">
+      <div class="section-head">
+        <h2>Upcoming events</h2>
+        <input id="search" type="search" placeholder="Search by title or venue">
+      </div>
+      <div id="event-grid" class="event-grid"></div>
+      <p id="empty" class="muted hidden">No events found.</p>
+    </section>
+
+    <section id="create" class="card">
+      <h2>Create an event</h2>
+      <form id="event-form" class="form-grid">
+        <label>Title<input name="title" placeholder="e.g. Cloud Computing Seminar" maxlength="100" required></label>
+        <label>Venue<input name="venue" placeholder="e.g. CS Auditorium" required></label>
+        <label>Date<input name="event_date" type="date" required></label>
+        <label>Capacity<input name="capacity" type="number" min="1" max="10000" placeholder="e.g. 50" required></label>
+        <button type="submit" class="btn">Create event</button>
+      </form>
+      <p id="event-message" class="message"></p>
+    </section>
+
+    <section id="deployment" class="card">
+      <h2>Live deployment status</h2>
+      <p class="muted">Every push to GitHub is tested, built and rolled out here by Jenkins. Refresh to see requests served by different pods.</p>
+      <div class="tiers">
+        <div class="tier"><h3>Tier 1 &middot; Frontend</h3><p>nginx web server</p><span id="frontend-pod">checking&hellip;</span></div>
+        <div class="tier"><h3>Tier 2 &middot; Backend</h3><p>Node.js REST API</p><span id="backend-pod">checking&hellip;</span></div>
+        <div class="tier"><h3>Tier 3 &middot; Database</h3><p>PostgreSQL</p><span id="database-status">checking&hellip;</span></div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="register-dialog">
+    <form id="register-form" method="dialog">
+      <h3 id="register-title">Register</h3>
+      <label>Full name<input name="attendee_name" placeholder="e.g. Ahmed Raza" required></label>
+      <label>Email<input name="email" type="email" placeholder="e.g. ahmed@example.com" required></label>
+      <p id="register-message" class="message"></p>
+      <div class="dialog-actions">
+        <button type="button" class="btn secondary" id="register-cancel">Cancel</button>
+        <button type="submit" class="btn">Register</button>
+      </div>
+      <h4>Attendees</h4>
+      <ul id="attendee-list" class="attendees"></ul>
+    </form>
+  </dialog>
+
+  <footer>
+    <div class="container">CSC418 DevOps for Cloud Computing &middot; Jenkins CI/CD Lab Mid &middot; M Ashhad (FA23-BCS-044)</div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

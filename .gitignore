@@ -1,0 +1,4 @@
+node_modules/
+backend/test-results.xml
+# Kubernetes access for Jenkins stays on this machine only
+jenkins/secrets/

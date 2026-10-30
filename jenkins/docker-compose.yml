@@ -1,0 +1,26 @@
+# The Jenkins server for the Event Management CI/CD pipeline: http://localhost:8090
+name: event-cicd
+services:
+  jenkins:
+    build: .
+    image: event-jenkins:lts
+    container_name: jenkins-event
+    restart: unless-stopped
+    ports:
+      - "8090:8080"
+    # The Docker socket is owned by group 0; this lets the jenkins user run docker builds.
+    group_add:
+      - "0"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    secrets:
+      - kubeconfig
+
+secrets:
+  # Written by jenkins/setup-k8s-access.sh: access to the event-management namespace only.
+  kubeconfig:
+    file: ./secrets/kubeconfig
+
+volumes:
+  jenkins_home:

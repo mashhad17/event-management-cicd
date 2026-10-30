@@ -1,0 +1,14 @@
+{
+  "name": "event-management-api",
+  "version": "1.0.0",
+  "description": "Backend tier of the Event Management 3-tier website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test --test-reporter=spec --test-reporter-destination=stdout --test-reporter=junit --test-reporter-destination=test-results.xml"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "pg": "^8.13.1"
+  }
+}
