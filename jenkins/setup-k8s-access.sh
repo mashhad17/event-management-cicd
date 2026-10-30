@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
-# One-time setup, run with your own kubectl access to Docker Desktop's Kubernetes:
+# One-time setup, run with your own kubectl access to the cluster:
 #  1. creates the event-management namespace and the jenkins-deployer service account (RBAC)
 #  2. creates the database password Secret (random, never stored in Git)
 #  3. writes jenkins/secrets/kubeconfig, which the Jenkins container uses to deploy
+# Defaults are for Docker Desktop; on the EC2 server (k3s) aws/setup-ec2.sh overrides both.
 set -euo pipefail
 cd "$(dirname "$0")"
 
-CONTEXT=docker-desktop
+CONTEXT=${K8S_CONTEXT:-docker-desktop}
 NAMESPACE=event-management
-SERVER=https://kubernetes.docker.internal:6443
+SERVER=${K8S_SERVER:-https://kubernetes.docker.internal:6443}
 
 kubectl --context "$CONTEXT" apply -f ../k8s-setup/jenkins-access.yaml
 

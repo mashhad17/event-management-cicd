@@ -1,0 +1,10 @@
+# Extra settings for running Jenkins on the EC2 server (Linux), used together with docker-compose.yml:
+#   docker compose -f jenkins/docker-compose.yml -f jenkins/docker-compose.ec2.yml up -d --build
+services:
+  jenkins:
+    ports: !override
+      - "8080:8080"
+    # Docker Desktop provides host.docker.internal by itself; on Linux this adds it, so the
+    # pipeline can reach k3s (port 6443) and the website (NodePort 30090) on the server.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
