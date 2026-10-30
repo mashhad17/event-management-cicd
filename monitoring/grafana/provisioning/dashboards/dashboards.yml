@@ -1,0 +1,7 @@
+apiVersion: 1
+providers:
+  - name: EventHub
+    folder: EventHub CI/CD
+    type: file
+    options:
+      path: /var/lib/grafana/dashboards
