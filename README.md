@@ -52,3 +52,8 @@ docker exec jenkins-event cat /var/jenkins_home/secrets/initialAdminPassword
    → Git → `https://github.com/mashhad17/event-management-cicd.git` → branch `*/main` →
    Script Path `Jenkinsfile` → **Save** → **Build Now**.
 4. The website is live at **http://localhost:30090**. Later pushes deploy automatically.
+
+## Live
+
+- Jenkins: http://localhost:8090 (job `event-management-cicd`)
+- Website: http://localhost:30090
